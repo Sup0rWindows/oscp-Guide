@@ -12,6 +12,34 @@ In this repository I have put some useful information and tips about the OSCP ce
 Offensive Security Certified Professional. It is a certification offered by Offsec , which focuses on penetration testing and ethical hacking. The OSCP certification is well-regarded in the cybersecurity industry and is known for its hands-on, practical approach to teaching penetration testing skills.
 
 
+#Content
+
+1- Penetration Testint With Kali : General Information
+2 - Getting Comfortable With Kali Linux 
+3 - Command Line Fun
+4 - Practical Tools
+5 - Bash Scripting 
+6 - Passive Information Gathering
+7 - Active Information Gathering
+8 - Vulnerability Scanning
+9 - Web Applications Attacks
+10 - Into To Buffer OverFlows
+11 - Windows Buffer OverFlows
+12 - Linux Buffer OverFlows
+13 - Client Side Attacks 
+14 - Locating Public Exploits
+15 - Fixing Exploits
+16 - File Transfer
+17 - Antivirus Evasion
+18 - Privilege Escalation
+19 - Password Attacks
+20 - Port Redirection And Tunneling
+21 - Ative Directory Attacks
+22 - The Metasploit Framework
+23 - PowerShell Empire
+24 - Assembling The Pieces : Penetration Testing BreakDown
+25 - Trying Harder : The Labs
+
 #Cheatsheets
 
 1 - https://medium.com/@hakluke/haklukes-ultimate-oscp-guide-part-3-practical-hacking-tips-and-tricks-c38486f5fc97

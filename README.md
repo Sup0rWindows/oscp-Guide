@@ -1,5 +1,4 @@
 # oscp-guide
-OSCP Writeup
 
 
 Hi Guys ❤️ 
@@ -7,12 +6,12 @@ In this repository I have put some useful information and tips about the OSCP ce
 
 
 
-#What is oscp ?
+# What is oscp ?
 
 Offensive Security Certified Professional. It is a certification offered by Offsec , which focuses on penetration testing and ethical hacking. The OSCP certification is well-regarded in the cybersecurity industry and is known for its hands-on, practical approach to teaching penetration testing skills.
 
 
-#Content
+# Content
 
 1- Penetration Testint With Kali : General Information
 2 - Getting Comfortable With Kali Linux 
@@ -40,7 +39,7 @@ Offensive Security Certified Professional. It is a certification offered by Offs
 24 - Assembling The Pieces : Penetration Testing BreakDown
 25 - Trying Harder : The Labs
 
-#Cheatsheets
+# Cheatsheets
 
 1 - https://medium.com/@hakluke/haklukes-ultimate-oscp-guide-part-3-practical-hacking-tips-and-tricks-c38486f5fc97
 
@@ -54,7 +53,7 @@ Offensive Security Certified Professional. It is a certification offered by Offs
 
 6 - https://github.com/GDSSecurity/Windows-Exploit-Suggester
 
-#Machines
+# Machines
 
 TryHackMe
 Active Directory Basics - Easy
@@ -117,7 +116,7 @@ IMF - https://www.vulnhub.com/entry/imf-1,162/
 
 
 
-#ActiveDirectory
+# ActiveDirectory
 
 https://book.hacktricks.xyz/windows/active-directory-methodology
 
@@ -126,7 +125,7 @@ https://github.com/nirajkharel/AD-Pentesting-Notes
 https://github.com/tjnull/OSCP-Stuff/tree/master/Active-Directory
 
 
-#PrivilegeEscalation
+# PrivilegeEscalation
 
 
 - Windows Privilege Escalation Fundamentals (http://www.fuzzysecurity.com/tutorials/16.html)
